@@ -1,2 +1,9 @@
+# configuration
 venv/
+.idea/
+__pychache__/
+
+# secrets
 config.py
+
+# directories and files
