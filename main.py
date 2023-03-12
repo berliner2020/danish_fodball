@@ -3,11 +3,16 @@ import sportsmonk_session
 
 
 def execute():
+    # start api session
     sportsmonk_session.start_session()
 
+    # http request fields
+    base_url = ""
+
     # http request
-    sportmonk_session = s.get(url=base_url)
-    print(sportmonk_session.status_code)
+    r = sportsmonk_session.get(url=base_url)
+    print(r.status_code)
+
 
 if __name__ == '__main__':
     execute()
