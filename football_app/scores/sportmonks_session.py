@@ -1,6 +1,6 @@
 import requests
 from requests.exceptions import Timeout, ConnectionError
-import config
+from . import config
 
 
 def start_session() -> requests.Session:
