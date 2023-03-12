@@ -1,16 +1,16 @@
-import django
-import sportsmonk_session
+from football_app import sportmonks_session
 
 
 def execute():
     # start api session
-    sportsmonk_session.start_session()
+    sportmonks_session.start_session()
+    # query_str_parameters = {"include": "statistics"}
 
     # http request fields
-    base_url = ""
+    base_url = "https://api.sportmonks.com/v3/football/fixtures"
 
     # http request
-    r = sportsmonk_session.get(url=base_url)
+    r = sportmonks_session.get(url=base_url)
     print(r.status_code)
 
 
