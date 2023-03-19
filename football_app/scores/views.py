@@ -2,14 +2,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound
 from django.urls import reverse
 from django.template.loader import render_to_string
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import sportmonks_session
 import datetime
 
 
 def index(request):
-    response_data = render_to_string("scores/scores.html")
-    return HttpResponse(response_data)
+    return redirect("/scores/today")
 
 
 def scores_by_timestamp(request, timestamp):  # TODO(jeremy) this does not work as expected yet
@@ -40,9 +39,14 @@ def scores_by_word(request, date_word):
     r = sm.get(url=base_url)
     print(r.status_code)
 
+    # page data dictionary
+    context = {
+        "date": date_word,
+        "results": r.json()["data"]
+    }
+
     if date_word == "today" or date_word == "tomorrow" or date_word == "yesterday":
-        return render(request, "scores/scores.html")
-        # return HttpResponse(f"<h1>Scores for {date_word}: {r.json()}!</h1>")
+        return render(request, "scores/scores.html", context)
     else:
         return HttpResponseNotFound(
             "<h1>404 - Sorry, no scores can be returned for this date. \
