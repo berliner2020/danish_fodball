@@ -24,4 +24,3 @@ def start_session() -> requests.Session:
         raise ConnectionError(
             f"The SportMonks session request has experienced an error."
         ) from connection_exc
-
