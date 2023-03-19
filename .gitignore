@@ -8,3 +8,4 @@ config.py
 football_app/football_app/settings.py
 
 # directories and files
+football_app/scores/db.qlite3
