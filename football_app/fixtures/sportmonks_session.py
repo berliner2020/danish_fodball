@@ -1,6 +1,6 @@
 import requests
 from requests.exceptions import Timeout, ConnectionError
-import config
+from . import config
 
 
 def start_session() -> requests.Session:
@@ -24,4 +24,3 @@ def start_session() -> requests.Session:
         raise ConnectionError(
             f"The SportMonks session request has experienced an error."
         ) from connection_exc
-
