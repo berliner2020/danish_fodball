@@ -14,7 +14,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Danish Superliga</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,17 +37,17 @@
       </div>
     </nav>
 
-    <div class="container-fluid mx-4">
+    <div class="container-fluid mx-4 w-25">
         <div class="row my-3">
             <div class="col">
-                <h1>2023 Superliga Fixtures</h1>
+                <h1 class="display-1">Fixtures</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <ul class="list-unstyled">
-                    {% for fixture in fixtures %}
-                    <li>
+                <ul class="list-unstyled list-group list-group-flush">
+                    {% for fixture in fixtures|dictsortreversed:"starting_at" %}
+                    <li class="list-group-item">
                         <div>
                             <span>{{ fixture.name }}</span>
                             <span>{{ fixture.starting_at }}</span>
