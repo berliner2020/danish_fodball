@@ -8,7 +8,28 @@ import datetime
 
 
 def index(request):
-    return redirect("/scores/today")
+    return redirect("/fixtures/today")
+
+
+def fixtures(request):
+    # start api session
+    sm = sportmonks_session.start_session()
+
+    # http request fields
+    base_url = "https://api.sportmonks.com/v3/football/seasons/19686"
+    query_string_params = {"include": "fixtures"}
+
+    # http request
+    r = sm.get(url=base_url, params=query_string_params)
+    print(r.url)
+    print(r.status_code)
+
+    # page data dictionary
+    context = {
+        "fixtures": r.json()["data"]["fixtures"]
+    }
+
+    return render(request, "fixtures/fixtures.html", context)
 
 
 def scores_by_timestamp(request, timestamp):  # TODO(jeremy) this does not work as expected yet
@@ -19,11 +40,11 @@ def scores_by_timestamp(request, timestamp):  # TODO(jeremy) this does not work 
 
     if current_date:
         redirect_path = reverse("fixtures", args=["today"])
-        # return HttpResponseRedirect("/scores/today")
-        return render(request, "scores/scores.html")
+        # return HttpResponseRedirect("/fixtures/today")
+        return render(request, "fixtures/fixtures.html")
     else:
         return HttpResponseNotFound(
-            "<h1>404 - Sorry, no scores can be returned for this date. \
+            "<h1>404 - Sorry, no fixtures can be returned for this date. \
                                     Try searching for yesterday, today, or tomorrow instead</h1>"
         )
 
@@ -33,10 +54,12 @@ def scores_by_word(request, date_word):
     sm = sportmonks_session.start_session()
 
     # http request fields
-    base_url = "https://api.sportmonks.com/v3/football/fixtures"
+    base_url = "https://api.sportmonks.com/v3/football/seasons/19686"
+    query_string_params = {"include": "fixtures"}
 
     # http request
-    r = sm.get(url=base_url)
+    r = sm.get(url=base_url, params=query_string_params)
+    print(r.url)
     print(r.status_code)
 
     # page data dictionary
@@ -46,9 +69,9 @@ def scores_by_word(request, date_word):
     }
 
     if date_word == "today" or date_word == "tomorrow" or date_word == "yesterday":
-        return render(request, "scores/scores.html", context)
+        return render(request, "fixtures/fixtures.html", context)
     else:
         return HttpResponseNotFound(
-            "<h1>404 - Sorry, no scores can be returned for this date. \
+            "<h1>404 - Sorry, no fixtures can be returned for this date. \
                                     Try searching for yesterday, today, or tomorrow instead</h1>"
         )
