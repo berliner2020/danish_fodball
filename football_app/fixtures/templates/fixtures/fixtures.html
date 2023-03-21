@@ -44,18 +44,18 @@
             </div>
         </div>
         {% for fixture in fixtures|dictsortreversed:"starting_at" %}
-        <strong>{{ fixture.starting_at }}</strong>
-        <div class="row">
-            <div class="col">
-                <ul class="list-unstyled list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div>
-                            <span>{{ fixture.name }}</span>
-                        </div>
-                    </li>
-                </ul>
+            {% ifchanged %}<strong>{{ fixture.starting_at }}</strong>{% endifchanged %}
+            <div class="row">
+                <div class="col">
+                    <ul class="list-unstyled list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div>
+                                <span> {{ fixture.name }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 
