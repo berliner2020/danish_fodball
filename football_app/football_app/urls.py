@@ -20,6 +20,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('admin/', admin.site.urls),
-    path('fantasy', include("fantasy.urls")),
-    path('fixtures/', include("fixtures.urls"))  # URLs from fixtures app
+    path('fantasy/', include("fantasy.urls")),
+    path('fixtures/', include("fixtures.urls")),
+    path('tables/', include("tables.urls")),
 ]
