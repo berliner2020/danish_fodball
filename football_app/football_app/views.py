@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect
 import datetime
 
 
-# Create your views here.
 def index(request):
-    return HttpResponse("<h1>Superliga Fantasy</h1>")
+    return redirect("/fixtures/")
 
