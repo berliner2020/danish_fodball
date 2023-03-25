@@ -43,20 +43,20 @@
                 <h1 class="display-1">Fixtures</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <ul class="list-unstyled list-group list-group-flush">
-                    {% for fixture in fixtures|dictsortreversed:"starting_at" %}
-                    <li class="list-group-item">
-                        <div>
-                            <span>{{ fixture.name }}</span>
-                            <span>{{ fixture.starting_at }}</span>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+        {% for fixture in fixtures|dictsortreversed:"starting_at" %}
+            {% ifchanged %}<strong>{{ fixture.starting_at }}</strong>{% endifchanged %}
+            <div class="row">
+                <div class="col">
+                    <ul class="list-unstyled list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div>
+                                <span> {{ fixture.name }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
 
     <!-- JavaScript: Bootstrap -->
