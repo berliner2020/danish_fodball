@@ -9,3 +9,6 @@ football_app/football_app/settings.py
 
 # directories and files
 football_app/fixtures/db.qlite3
+
+# databases
+/football_app/db.sqlite3
