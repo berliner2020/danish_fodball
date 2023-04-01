@@ -21,22 +21,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="/tables">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Fixtures</a>
+              <a class="nav-link" href="/fixtures">Fixtures</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Results</a>
+                <a class="nav-link" href="/results">Results</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tables</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'tables' %}">Tables</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Stats</a>
+              <a class="nav-link" href="/stats">Stats</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Fantasy</a>
+              <a class="nav-link" href="/fantasy">Fantasy</a>
             </li>
           </ul>
         </div>
@@ -67,7 +67,7 @@
             </tr>
           </thead>
           <tbody>
-          {% for table in tables %}
+          {% for table in tables|dictsort:"position" %}
             <tr>
                 <th scope="row">{{ table.position }}</th>
                 <td><img src={{ table.participant.image_path }} alt="Logo for{{ table.participant.name}}"
@@ -87,26 +87,7 @@
           {% endfor %}
           </tbody>
         </table>
-
-
-            <div class="row">
-                <div class="col">
-                    <ul class="list-unstyled list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div>
-                                <span> {{ table.position }}</span>
-                                <span>
-                                </span>
-                                <span> {{ table.participant.name }}</span>
-                                <span> {{ table.points }}</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
     </div>
-
-    <p>{{ tables }}</p>
 
     <!-- JavaScript: Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

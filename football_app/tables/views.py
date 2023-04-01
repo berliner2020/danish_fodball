@@ -23,9 +23,20 @@ def tables(request):
     print(r.url)
     print(r.status_code)
 
+    print(r.json())
+
+    # clean API tables data
+    table_data = {}
+
+    for row in r.json()["data"]:
+        table_data[row["participant_id"]] = row
+
+    # print(table_data.keys())
+    # print(table_data.values())
+
     # page data dictionary
     context = {
-        "tables": r.json()['data']
+        "tables": table_data.values()
     }
 
     return render(request, "tables/tables.html", context)
