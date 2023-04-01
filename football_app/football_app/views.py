@@ -7,5 +7,5 @@ import datetime
 
 
 def index(request):
-    return redirect("/fixtures/")
+    return redirect("/tables/")
 
