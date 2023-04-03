@@ -16,9 +16,7 @@ def fixtures(request):
     sm = sportmonks_session.start_session()
 
     # http request fields
-    # base_url = "https://api.sportmonks.com/v3/football/seasons/19686"
     base_url = "https://api.sportmonks.com/v3/football/schedules/seasons/19686"
-    # query_string_params = {"include": "fixtures"}
 
     # http request
     # r = sm.get(url=base_url, params=query_string_params)
@@ -26,9 +24,14 @@ def fixtures(request):
     print(r.url)
     print(r.status_code)
 
+    # current date and time
+    current_date_unformatted = datetime.datetime.now()
+    current_date = current_date_unformatted.strftime("%Y-%m-%d %x")
+
     # page data dictionary
     context = {
-        "fixtures": r.json()["data"]
+        "fixtures": r.json()["data"],
+        "datetime": current_date
     }
 
     return render(request, "fixtures/fixtures.html", context)
