@@ -70,8 +70,10 @@
           {% for table in tables|dictsort:"position" %}
             <tr>
                 <th scope="row">{{ table.position }}</th>
-                <td><img src={{ table.participant.image_path }} alt="Logo for{{ table.participant.name}}"
-                width="15%">{{ table.participant.name}}
+                <td>
+                    <img src={{ table.participant.image_path }} alt="Logo for{{ table.participant.name}}"
+                    width="10%" class="me-2">
+                    <span>{{ table.participant.name}}</span>
                 </td>
                 <td></td>
                 <td></td>
