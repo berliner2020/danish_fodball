@@ -21,48 +21,74 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="fixtures/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'fixtures' %}">Fixtures</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Results</a>
+                <a class="nav-link" href="/results">Results</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tables</a>
+              <a class="nav-link" href="/tables">Tables</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Stats</a>
+              <a class="nav-link" href="/stats">Stats</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Fantasy</a>
+              <a class="nav-link" href="/fantasy">Fantasy</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container-fluid mx-4 w-25">
+    <div class="container-fluid mx-4">
         <div class="row my-3">
             <div class="col">
                 <h1 class="display-1">Fixtures</h1>
             </div>
         </div>
-        {% for fixture in fixtures|dictsortreversed:"starting_at" %}
-            {% ifchanged %}<strong>{{ fixture.starting_at }}</strong>{% endifchanged %}
-            <div class="row">
-                <div class="col">
-                    <ul class="list-unstyled list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div>
-                                <span> {{ fixture.name }}</span>
-                                <span><a href="#">View Match</a></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        {% for fixture in fixtures|dictsort:"starting_at" %}
+            {% if fixture.name == "Regular Season" %}
+                {% for week in fixture.rounds %}
+                    <h3>{{ week.starting_at }}</h3>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for match in week.fixtures %}
+                        <tr>
+                          <th scope="row">{{ match.starting_at }}</th>
+                            {% for team in match.participants %}
+                                {% if team.meta.location == "home" %}
+                                <td>
+                                    <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="10%"
+                                     class="me-2">
+                                    <span>{{ team.name }}</span>
+                                </td>
+                                <td>
+                                     <span>{{ team.location_id }}</span>
+                                </td>
+                               {% else %}
+                                <td>
+                                   <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="10%"
+                                     class="me-2"><span>{{ team.name }}</span>
+                                </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
     </div>
 
