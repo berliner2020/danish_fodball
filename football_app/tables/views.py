@@ -23,8 +23,6 @@ def tables(request):
     print(r.url)
     print(r.status_code)
 
-    print(r.json())
-
     # clean API tables data
     table_data = {}
 
