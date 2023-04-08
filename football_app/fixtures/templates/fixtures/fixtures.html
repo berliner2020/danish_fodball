@@ -66,9 +66,10 @@
             {% if fixture.name == "Regular Season" %}
                 {% for week in fixture.rounds %}
                     <h4>{{ week.starting_at }}</h4>
-                    <table class="table table-sm table-hover">
+                    <table class="table table-sm table-hover w-75">
                       <thead>
                         <tr>
+                          <th scope="col"></th>
                           <th scope="col"></th>
                           <th scope="col"></th>
                           <th scope="col"></th>
@@ -78,22 +79,21 @@
                       {% for match in week.fixtures %}
                         <tr>
                           <th scope="row" class="fw-normal">{{ match.starting_at }}</th>
-                            {% for team in match.participants %}
+                            {% for team in match.participants|dictsortreversed:"meta.location" %}
                                 {% if team.meta.location == "home" %}
-                                <td>
-                                    <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="7%"
+                                <td class="text-end pe-3">
+                                    <span class="pe-3">{{ team.name }}</span>
+                                    <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="9%"
                                      class="me-2">
-                                    <span>{{ team.name }}</span>
-                                    <span class="badge rounded-pill text-bg-success ms-3">H</span>
                                 </td>
                                {% else %}
-                                <td>
-                                   <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="7%"
-                                     class="me-2"><span>{{ team.name }}</span>
-                                    <span class="badge rounded-pill text-bg-danger ms-3">A</span>
+                                <td class="ps-3">
+                                   <img src={{ team.image_path }} alt="Logo for{{ team.name }}" width="9%">
+                                    <span class="ps-3">{{ team.name }}</span>
                                 </td>
                                 {% endif %}
                             {% endfor %}
+                            <td><i class="fa-solid fa-arrow-right"></i></td>
                         </tr>
                       {% endfor %}
                       </tbody>
