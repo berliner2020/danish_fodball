@@ -23,4 +23,5 @@ urlpatterns = [
     path('fantasy/', include("fantasy.urls")),
     path('fixtures/', include("fixtures.urls")),
     path('tables/', include("tables.urls")),
+    path('results/', include("results.urls")),
 ]
