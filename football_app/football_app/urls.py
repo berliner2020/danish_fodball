@@ -24,4 +24,5 @@ urlpatterns = [
     path('fixtures/', include("fixtures.urls")),
     path('tables/', include("tables.urls")),
     path('results/', include("results.urls")),
+    path('stats/', include("stats.urls")),
 ]
