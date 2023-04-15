@@ -1,12 +1,12 @@
 import requests
 from requests.exceptions import Timeout, ConnectionError
-from . import config_tables
+from . import config
 
 
 def start_session() -> requests.Session:
     """Start a new SportsMonk API session."""
     # fields
-    headers = {"Authorization": config_tables.sportmonks_api_token}
+    headers = {"Authorization": config.sportmonks_api_token}
 
     # http session request
     try:
